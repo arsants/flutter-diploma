@@ -1,0 +1,9 @@
+Find out, who could ride more distance in a limited amount of time.
+
+- Create your own rides or join existing ones
+- Monitor other cyclists progress during the race in real time
+
+This is a first version of the app. In the future we're goint to:
+- Make the design prettier
+- Add matchmaking
+- Add levels and challenges

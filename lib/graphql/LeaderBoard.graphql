@@ -1,0 +1,14 @@
+query GetLeaderBoard ($time: Int!){
+  timeLimitLeaderboard(timeLimitMinutes: $time){
+    id
+    user{
+      firstName
+      lastName
+      username
+      profile{
+        isPublic
+      }
+    }
+    distanceMeters
+  }
+}

@@ -1,0 +1,210 @@
+type CreateRideMutation {
+  success: Boolean!
+  ride: RideNode!
+}
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+type JoinRideMutation {
+  ride: RideNode!
+}
+
+type LeaveRideMutation {
+  success: Boolean!
+}
+
+input LocationInput {
+  longitude: Float!
+  latitude: Float!
+}
+
+type Logout {
+  success: Boolean!
+}
+
+type Mutation {
+  register(password1: String!, password2: String!, username: String!): Register
+  tokenAuth(password: String!, username: String!): TokenAuth
+  logout: Logout
+  socialAuth(accessToken: String!, provider: String!): SocialAuth
+  updateCurrentLocation(input: UpdateLocationInput!): UpdateCurrentLocation
+  joinRide(inviteCode: String!): JoinRideMutation
+  createRide(input: RideInput!): CreateRideMutation
+  startRide(rideId: UUID!, secondsBeforeStart: Int!): StartRideMutation
+  leaveRide(rideId: UUID!): LeaveRideMutation
+  updateProfile(input: UpdateProfileInput!): UpdateProfileMutation
+}
+
+type PaginationInfo {
+  totalCount: Int!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  nextPage: Int
+  prevPage: Int
+  currentPage: Int
+  perPage: Int
+}
+
+type ProfileNode {
+  id: UUID!
+  telegram: String
+  isPublic: Boolean!
+}
+
+type Query {
+  me: UserNode!
+  userByUsername(username: String!): UserNode!
+  ride(id: UUID!): RideNode!
+  timeLimitLeaderboard(timeLimitMinutes: Int!): [TrackNode]!
+}
+
+type Register {
+  success: Boolean!
+  token: String!
+  user: UserNode!
+}
+
+type ResultNode {
+  id: UUID!
+  user: UserNode!
+  startTime: DateTime!
+  endTime: DateTime
+  distanceMeters: Float!
+  isHistoric: Boolean!
+  isMe: Boolean!
+}
+
+input RideInput {
+  timeLimitMinutes: Int
+  type: RideTypeEnum!
+  historicTrackId: UUID
+}
+
+type RideNode {
+  id: UUID!
+  status: RideStatusEnum!
+  inviteCode: String!
+  timeLimitMinutes: Int!
+  creator: UserNode!
+  startTime: DateTime
+  endTime: DateTime
+  type: RideTypeEnum!
+  isCreator: Boolean!
+  isFinished: Boolean!
+  results: [ResultNode]!
+  totalMeters: Float!
+}
+
+"""An enumeration."""
+enum RideStatusEnum {
+  CREATED
+  ONGOING
+  FINISHED
+  DELETED
+}
+
+"""An enumeration."""
+enum RideTypeEnum {
+  REAL_TIME
+  HISTORIC
+}
+
+type SocialAuth {
+  social: SocialType
+  token: String!
+}
+
+scalar SocialCamelJSON
+
+type SocialType {
+  id: ID!
+  user: UserNode!
+  provider: String!
+  uid: String!
+  extraData: SocialCamelJSON
+  created: DateTime!
+  modified: DateTime!
+}
+
+type StartRideMutation {
+  success: Boolean!
+  ride: RideNode!
+}
+
+type TokenAuth {
+  token: String!
+  success: Boolean!
+  user: UserNode!
+}
+
+type TrackNode {
+  id: UUID!
+  user: UserNode!
+  startTime: DateTime!
+  endTime: DateTime
+  distanceMeters: Float!
+  ride: RideNode!
+}
+
+enum TrackOrderEnum {
+  START_TIME_ASC
+  START_TIME_DESC
+  DISTANCE_ASC
+  DISTANCE_DESC
+}
+
+type TrackResponse {
+  tracks: [TrackNode]!
+  paginationInfo: PaginationInfo!
+}
+
+type UpdateCurrentLocation {
+  success: Boolean!
+}
+
+input UpdateLocationInput {
+  location: LocationInput!
+}
+
+input UpdateProfileInput {
+  username: String
+  firstName: String
+  lastName: String
+  telegram: String
+  isPublic: Boolean
+}
+
+type UpdateProfileMutation {
+  success: Boolean!
+  user: UserNode!
+}
+
+type UserNode {
+  """
+  Designates that this user has all permissions without explicitly assigning them.
+  """
+  isSuperuser: Boolean!
+
+  """Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."""
+  username: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  id: UUID!
+  profile: ProfileNode!
+  tracks(timeLimitMinutes: Int!, rideStatuses: [RideStatusEnum], orderBy: TrackOrderEnum!, rideType: RideTypeEnum): TrackResponse!
+  totalMeters: Float!
+  finishedRides: Int!
+}
+
+"""
+Leverages the internal Python implmeentation of UUID (uuid.UUID) to provide native UUID objects
+in fields, resolvers and input.
+"""
+scalar UUID
+

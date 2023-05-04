@@ -1,0 +1,61 @@
+query GetRide($id: UUID!) {
+  ride(id: $id) {
+    results {
+      isMe
+      isHistoric
+      id
+      user {
+        username
+      }
+      distanceMeters
+    }
+    ...RideNodeFields
+  }
+}
+
+mutation CreateHistoricRide($historicTrackId: UUID) {
+  createRide(input: { historicTrackId: $historicTrackId, type: HISTORIC }) {
+    ride {
+      ...RideNodeFields
+    }
+  }
+}
+mutation CreateRide($duration: Int!) {
+  createRide(input: { timeLimitMinutes: $duration, type: REAL_TIME }) {
+    ride {
+      ...RideNodeFields
+    }
+  }
+}
+
+mutation StartRide($id: UUID!, $sec: Int!) {
+  startRide(rideId: $id, secondsBeforeStart: $sec) {
+    ride {
+      ...RideNodeFields
+    }
+  }
+}
+
+mutation LeaveRide($id: UUID!) {
+  leaveRide(rideId: $id) {
+    success
+  }
+}
+
+mutation JoinRide($code: String!) {
+  joinRide(inviteCode: $code) {
+    ride {
+      ...RideNodeFields
+    }
+  }
+}
+
+fragment RideNodeFields on RideNode {
+  id
+  status
+  startTime
+  isCreator
+  isFinished
+  inviteCode
+  timeLimitMinutes
+}

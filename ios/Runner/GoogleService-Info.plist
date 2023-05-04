@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>600952919377-mfegggc1gslbabu3pnib62kllk9j8b0v.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.600952919377-mfegggc1gslbabu3pnib62kllk9j8b0v</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>600952919377-4m8ljvqv0via1bscr5ige14u4rdf4mvq.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAsPpM6CiWKb2cwF3foMEsoPpqcoACTqkc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>600952919377</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.maxifom.katai-project</string>
+	<key>PROJECT_ID</key>
+	<string>bicycle-riders-app-v2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bicycle-riders-app-v2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:600952919377:ios:5cacb05afbd5131034af70</string>
+</dict>
+</plist>

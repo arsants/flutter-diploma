@@ -1,0 +1,91 @@
+name: katai
+description: A new Flutter application.
+
+publish_to: 'none'
+version: 1.0.4+21
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Lumberdash
+  lumberdash: ^3.0.0
+  print_lumberdash: ^3.0.0
+  # Connection
+  internet_connection_checker: ^0.0.1
+  # Service locator
+  get_it: ^6.1.1
+  # Bloc for state management
+  flutter_bloc: ^7.0.0
+  # Value equality
+  equatable: ^2.0.0
+  # Functional programming thingies
+  dartz: ^0.10.0-nullsafety.1
+  # Local cache
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
+  # Auto route
+  auto_route: ^1.0.2
+
+  provider: ^5.0.0
+
+  path_provider: ^2.0.1
+  # Update to pub.dev version once its published
+  dash_chat:
+    git:
+      url: git@github.com:fayeed/dash_chat.git
+
+
+  google_maps_flutter: ^2.0.3
+  location: ^4.1.1
+
+  font_awesome_flutter: ^9.0.0
+  easy_localization: ^3.0.0
+  url_launcher: ^6.0.3
+
+  # Ferry
+  ferry: ^0.10.1-0.1.nullsafety.0
+  ferry_hive_store: ^0.4.1-0.1.nullsafety.0
+  gql_http_link: ^0.4.0-nullsafety.1
+
+  # Firebase Readme 5
+  firebase_core: ^1.1.0
+  firebase_analytics: ^8.0.2
+  firebase_crashlytics: ^2.0.2
+
+  google_sign_in: ^5.0.2
+  sign_in_with_apple: ^3.0.0
+  flutter_signin_button: ^2.0.0
+  url_strategy: ^0.2.0
+  sqlite3_flutter_libs: ^0.4.1
+  path: ^1.8.0
+  flutter_slidable: ^0.6.0
+  sliding_up_panel: ^2.0.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.0.6
+  bloc_test: ^8.0.0
+  lint: ^1.5.3
+  auto_route_generator: ^1.0.2
+  build_runner: ^1.12.2
+  ferry_generator: ^0.4.1-0.1.nullsafety.0
+  flutter_launcher_icons: "^0.9.0"
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  remove_alpha_ios: true
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/logo.png
+    - locales/translations/
+    - assets/midrange.jpeg
+    - assets/sprint.jpeg
+    - assets/long distance.jpeg

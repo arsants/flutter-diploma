@@ -1,0 +1,40 @@
+default_platform(:android)
+
+platform :android do
+   
+  lane :build do
+    # gradle action (bundleRelease for aab) probably will work, but using flutter for version code sync between platfroms
+    # flutter pubspec.yaml version == version_name+version_code 
+    # it automatically changes local.properties file and set version_name and version_code
+    # 1.0.3+1 == version_name=1.0.3 + version_code=1
+    # version_code needs to be increased every time the new build comes (even if we increase version_name we need to increase version_code)
+    sh("cd .. && flutter build appbundle")
+    
+  end
+
+  lane :beta do
+    build
+    upload_to_play_store(
+      track: 'beta',
+      skip_upload_changelogs: true,
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      aab: '../build/app/outputs/bundle/release/app-release.aab'
+    )
+  end
+
+  lane :playstore do
+      build
+      upload_to_play_store(
+        track: 'production',
+        skip_upload_changelogs: true,
+        skip_upload_apk: true,
+        skip_upload_metadata: true,
+        skip_upload_images: true,
+        skip_upload_screenshots: true,
+        aab: '../build/app/outputs/bundle/release/app-release.aab'
+      )
+  end
+end

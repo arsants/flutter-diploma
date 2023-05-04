@@ -1,0 +1,89 @@
+query GetMyProfile {
+  me {
+    ...UserNodeFields
+  }
+}
+
+query GetMyTracks(
+  $timeLimitMinutes: Int!
+  $orderBy: TrackOrderEnum!
+) {
+  me {
+    tracks(
+      rideStatuses: FINISHED
+      timeLimitMinutes: $timeLimitMinutes
+      orderBy: $orderBy
+    ) {
+      tracks {
+        endTime
+        distanceMeters
+        id
+      }
+    }
+  }
+}
+
+query GetUserTracks(
+  $username: String!
+  $timeLimitMinutes: Int!
+  $orderBy: TrackOrderEnum!
+) {
+  userByUsername(username: $username) {
+    tracks(
+      rideStatuses: FINISHED
+      timeLimitMinutes: $timeLimitMinutes
+      orderBy: $orderBy
+    ) {
+      tracks {
+        endTime
+        distanceMeters
+        id
+      }
+    }
+  }
+}
+query GetUserProfile($username: String!) {
+  userByUsername(username: $username) {
+    ...UserNodeFields
+  }
+}
+
+mutation UpdateProfile(
+  $firstName: String
+  $lastName: String
+  $username: String
+  $telegram: String
+) {
+  updateProfile(
+    input: {
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      telegram: $telegram
+    }
+  ) {
+    success
+    user {
+      ...UserNodeFields
+    }
+  }
+}
+
+mutation UpdatePublic($isPublic: Boolean) {
+  updateProfile(input: { isPublic: $isPublic }) {
+    success
+  }
+}
+
+fragment UserNodeFields on UserNode {
+  firstName
+  lastName
+  username
+  profile {
+    telegram
+    isPublic
+  }
+  totalMeters
+  finishedRides
+  isSuperuser
+}

@@ -1,0 +1,70 @@
+targets:
+  $default:
+    builders:
+      gql_build|schema_builder:
+        enabled: true
+        options:
+          type_overrides:
+            Upload:
+              name: MultipartFile
+              import: "package:http/http.dart"
+            DateTime:
+              name: DateTime
+            UUID:
+              name: String
+      gql_build|ast_builder:
+        enabled: true
+      gql_build|data_builder:
+        enabled: true
+        options:
+          schema: katai|lib/graphql/schema.graphql
+          type_overrides:
+            Upload:
+              name: MultipartFile
+              import: "package:http/http.dart"
+            DateTime:
+              name: DateTime
+            UUID:
+              name: String
+      gql_build|var_builder:
+        enabled: true
+        options:
+          schema: katai|lib/graphql/schema.graphql
+          type_overrides:
+            Upload:
+              name: MultipartFile
+              import: "package:http/http.dart"
+            DateTime:
+              name: DateTime
+            UUID:
+              name: String
+      gql_build|serializer_builder:
+        enabled: true
+        options:
+          schema: katai|lib/graphql/schema.graphql
+          custom_serializers:
+            - import: 'package:katai/core/util/datetime_serializer.dart'
+              name: DateTimeSerializer
+          type_overrides:
+            Upload:
+              name: MultipartFile
+              import: "package:http/http.dart"
+            DateTime:
+              name: DateTime
+            UUID:
+              name: String
+      ferry_generator|req_builder:
+        enabled: true
+        options:
+          schema: katai|lib/graphql/schema.graphql
+          type_overrides:
+            Upload:
+              name: MultipartFile
+              import: "package:http/http.dart"
+            DateTime:
+              name: DateTime
+            UUID:
+              name: String
+
+
+# flutter pub run build_runner build --delete-conflicting-outputs

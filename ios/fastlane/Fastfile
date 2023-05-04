@@ -1,0 +1,45 @@
+before_all do
+  Dotenv.load(".env.secret")
+end
+
+
+
+platform :ios do
+  before_all do
+    Dotenv.load ".env.ios"
+  end
+
+  desc "Parse flutter version to version name and version code"
+  lane :parse_version do
+    require 'yaml'
+    thing = YAML.load_file('../../pubspec.yaml')
+    $version_name = thing["version"].split('+')[0]
+    $version_code = thing["version"].split('+')[1]
+    puts "Parsed flutter version: " + $version_name + "+" + $version_code
+  end
+
+  desc "Sync signing"
+  lane :signing do
+    sync_code_signing
+    
+    mapping = Actions.lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+    update_code_signing_settings(
+      profile_name: mapping[ENV['MATCH_APP_IDENTIFIER']]
+    )
+  end
+  
+  desc "Build binary"
+  lane :build do
+    signing
+    build_ios_app(scheme: "Runner", configuration: "Release")
+  end
+
+  "Release"
+  lane :release do
+    parse_version
+    increment_version_number(version_number: $version_name)
+    increment_build_number(build_number: $version_code)
+    build
+    upload_to_app_store
+  end
+end

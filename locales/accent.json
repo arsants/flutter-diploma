@@ -1,0 +1,12 @@
+{
+  "apiUrl": "https://accent.ekbicycle.ru",
+  "apiKey": "k-uTl7VR-VhV9rYDnX17NFom9nfA3FnIeYDXsKedsYcMN2_AOZlRfmJycSANKnQmS-BbViPoBCYTscJg9cum90fOws7Xsg",
+  "files": [
+    {
+      "namePattern": "fullDirectory",
+      "format": "json",
+      "source": "./translations/en.json",
+      "target": "./translations/%slug%.json"
+    }
+  ]
+}

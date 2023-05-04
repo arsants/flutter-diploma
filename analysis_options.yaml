@@ -1,0 +1,14 @@
+include: package:lint/analysis_options.yaml
+
+analyzer:
+  strong-mode:
+    # Чтобы не кастить dynamic в Map<String, dynamic) при распаковке JSON
+    implicit-casts: true
+  errors:
+    missing_required_param: error
+    import_of_legacy_library_into_null_safe: ignore
+  exclude:
+    - "**/*.g.dart"
+linter:
+  rules:
+    avoid_dynamic_calls: false

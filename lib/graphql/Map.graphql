@@ -1,0 +1,6 @@
+
+mutation updateCurrentLocation($currentLocation: UpdateLocationInput!) {
+  updateCurrentLocation(input: $currentLocation) {
+    success
+  }
+}
